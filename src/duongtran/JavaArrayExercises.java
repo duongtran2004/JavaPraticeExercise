@@ -85,6 +85,6 @@ public static void Ex2(){
 
     public static void main(String[] args) {
         //Ex1();
-        Ex2();
+        //Ex2();
     }
 }
