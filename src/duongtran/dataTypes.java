@@ -1,6 +1,7 @@
 package duongtran;
 
 import java.text.DecimalFormat;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class dataTypes {
@@ -138,7 +139,19 @@ public class dataTypes {
             System.out.println("Max integer: " + max);
             System.out.println("Min integer: " + min);
         }
-
+    }
+    public  static  void breakIntegerIntoDigits(){
+        //Test Data
+        //Input six non-negative digits integer: 123456
+        //Expected Output :
+        //1 2 3 4 5 6
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Input six non-negative digits integer:");
+        int input = scanner.nextInt();
+        String string = Integer.toString(input);
+        System.out.println(string);
+        String[] sequence = string.split("");
+        System.out.println(Arrays.toString(sequence));
 
     }
 
@@ -149,7 +162,8 @@ public class dataTypes {
         //convertMinutesToYearsAndDays();
         //BMICalculator();
         //averageSpeed();
-        analyseTwoIntegers();
+        //analyseTwoIntegers();
+        breakIntegerIntoDigits();
 
     }
 }
