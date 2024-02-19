@@ -408,6 +408,7 @@ public class conditionalAndPatterns {
 
     //default increasing
     public static void increasingBottomLeftTrianglePatterns() {
+        //default user input
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter the number of rows: ");
         int n = scanner.nextInt();
@@ -525,13 +526,13 @@ public class conditionalAndPatterns {
         // we can fix this by delete any (j<i)
     }
 
-    public static void reversePyramidPatterns(){
+    public static void reversePyramidPatterns() {
         //default user input
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter the number of rows: ");
         int n = scanner.nextInt();
         // reversePyramid's outer loop to move to next line
-        for (int i = 1; i <= n; i ++){
+        for (int i = 1; i <= n; i++) {
             //inner loops:
             // top right + top left. Please remove 1 extra column.
             //print top right first
@@ -551,7 +552,8 @@ public class conditionalAndPatterns {
             System.out.println(); //outer loop's println()
         }
     }
-    public static void diamondPatterns(){
+
+    public static void diamondPatterns() {
         //Pyramid + Reverse Pyramid
         // We need 2, independent outer rows for each pyramid
         // And remove 1 extra rows so we can have side-peaks
@@ -560,8 +562,8 @@ public class conditionalAndPatterns {
         System.out.println("Please enter the number of rows: ");
         int n = scanner.nextInt();
         //diamondPatterns does not have unique outer loop
-            //2 outer  loops: Pyramid + Reverse Pyramid
-            //PRINT PYRAMID FIRST
+        //2 outer  loops: Pyramid + Reverse Pyramid
+        //PRINT PYRAMID FIRST
 //pyramidPatterns 's outer loop
         for (int i = 1; i < n; i++) {
             //inside the outer loop
@@ -583,9 +585,9 @@ public class conditionalAndPatterns {
             }
             System.out.println(); //remember to print() at the outer loop to move to next line after finish printing each line
         }
-                      //THEN PRINT REVERSE PYRAMID
+        //THEN PRINT REVERSE PYRAMID
         // reversePyramid's outer loop to move to next line
-        for (int i = 1; i <= n; i ++){
+        for (int i = 1; i <= n; i++) {
             //inner loops:
             // top right + top left. Please remove 1 extra column.
             //print top right first
@@ -605,20 +607,116 @@ public class conditionalAndPatterns {
             System.out.println(); //outer loop's println()
         }
 
-        }
-        //THEN REMOVE 1 EXTRA ROW (2ND STATEMENT OF 1 OF THE 2 OUTER LOOPS)
+    }
 
-
-
-
-
-
-
-
+    //THEN REMOVE 1 EXTRA ROW (2ND STATEMENT OF 1 OF THE 2 OUTER LOOPS)
     //Numbers pattern
-
     //how to solve any number patterns program in Java
     //https://www.youtube.com/watch?v=uyu_jf01a74
+// DONT TOO FOCUS ON SHAPE, BUT RATHER FOCUS ON DIFFERENT TYPES OF CHANGING NUMBERS
+    //Note: Java execute code of the inner loop first, then move to outer loop. It also print each line first, then move to the next line
+    //Outer loop: decide columns
+    //Inner loop: deciding rows
+    // p at outer loop : similar rows, but different columns
+    // p at inner loop: different rows, but similar columns
+    public static void incrementDifferentRowsBottomLeftNumberPatterns() {
+        //default user input
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please enter the number of rows: ");
+        int n = scanner.nextInt();
+        //copy code from shape methods you created above
+        //remember: separate the generation of shapes and numbers by creating a new variable to hold numbers in 1st and 3rd statement of outer loop.
+        //Also print p in inner loop
+        //outer loop for columns (since we have to finish printing each line first then move to next line)
+        //loop from 1 to n
+        for (int i = 1; i <= n; i++) {
+            //inner loop for rows (what we print for each row)
+            //use different variables for inner loop (j instead of i)
+            //instead of looping from 1 to n, we should loop from 1 to i
+            // The position number of rows (ex: 1st row => i = 1) also indicate how many stars to print
+            //so j <= i for 2nd statement, inner loop
+            for (int j = 1, p = 1; j <= i; j++, p++) { //create p variable to hold numbers
+                //use print(), not println() since we want to print everything all on the same line (cursor unchanged)
+                System.out.print(p + " "); //remember whitespace
+            }
+            System.out.println(); //remember to print() at the outer loop to move to next line after finish printing each line
+        }
+    }
+
+    public static void incrementSimilarRowsBottomLeftNumberPatterns() {
+        //default user input
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please enter the number of rows: ");
+        int n = scanner.nextInt();
+        //copy code from shape methods you created above
+        //remember: separate the generation of shapes and numbers by creating a new variable to hold numbers in 1st and 3rd statement of outer loop.
+        //Also print p in inner loop
+        //outer loop for columns (since we have to finish printing each line first then move to next line)
+        //loop from 1 to n
+        for (int i = 1, p = 1; i <= n; i++, p++) {
+            //inner loop for rows (what we print for each row)
+            //use different variables for inner loop (j instead of i)
+            //instead of looping from 1 to n, we should loop from 1 to i
+            // The position number of rows (ex: 1st row => i = 1) also indicate how many stars to print
+            //so j <= i for 2nd statement, inner loop
+            for (int j = 1; j <= i; j++) { //create p variable to hold numbers
+                //use print(), not println() since we want to print everything all on the same line (cursor unchanged)
+                System.out.print(p + " "); //remember whitespace
+            }
+            System.out.println(); //remember to print() at the outer loop to move to next line after finish printing each line
+        }
+    }
+
+    public static void decrementSimilarRowsBottomLeftNumberPatterns() {
+        //default user input
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please enter the number of rows: ");
+        int n = scanner.nextInt();
+        //copy code from shape methods you created above
+        //remember: separate the generation of shapes and numbers by creating a new variable to hold numbers in 1st and 3rd statement of outer loop.
+        //Also print p in inner loop
+        //outer loop for columns (since we have to finish printing each line first then move to next line)
+        //loop from n to 1 for both i (columns) and p (numbers)
+        for (int i = n, p = n; i >= 1; i--, p--) {
+            //inner loop for rows (what we print for each row)
+            //use different variables for inner loop (j instead of i)
+            //instead of looping from 1 to n, we should loop from 1 to i
+            // The position number of rows (ex: 1st row => i = 1) also indicate how many stars to print
+            //so j <= i for 2nd statement, inner loop
+            for (int j = 1; j <= i; j++) { //create p variable to hold numbers
+                //use print(), not println() since we want to print everything all on the same line (cursor unchanged)
+                System.out.print(p + " "); //remember whitespace
+            }
+            System.out.println(); //remember to print() at the outer loop to move to next line after finish printing each line
+        }
+    }
+
+
+    public static void decrementDifferentRowsBottomLeftNumberPatterns() {
+        //default user input
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please enter the number of rows: ");
+        int n = scanner.nextInt();
+        //copy code from shape methods you created above
+        //remember: separate the generation of shapes and numbers by creating a new variable to hold numbers in 1st and 3rd statement of outer loop.
+        //Also print p in inner loop
+        //outer loop for columns (since we have to finish printing each line first then move to next line)
+        //loop from n to 1 for both i (columns, outer loops) and p (numbers, changed, inner loop)
+        for (int i = n; i >= 1; i--) {
+            //inner loop for rows (what we print for each row)
+            //use different variables for inner loop (j instead of i)
+            //instead of looping from 1 to n, we should loop from 1 to i
+            // The position number of rows (ex: 1st row => i = 1) also indicate how many stars to print
+            //so j <= i for 2nd statement, inner loop
+            for (int j = 1, p = n; j <= i; j++, p--) { //create p variable to hold numbers
+                //use print(), not println() since we want to print everything all on the same line (cursor unchanged)
+                System.out.print(p + " "); //remember whitespace
+            }
+            System.out.println(); //remember to print() at the outer loop to move to next line after finish printing each line
+        }
+    }
+    //ALTERNATE NUMBER
+    //INCLUDE IF-ELSE CONDITIONAL INSIDE FOR LOOP
 
 
     public static void main(String[] args) {
@@ -635,7 +733,7 @@ public class conditionalAndPatterns {
         //sumOfOddNaturalNumbers();
 //up to exercise 15
         //PATTERN
-        //Stars and shapes pattern
+        //SHAPE PATTERNS
         //squarePattern();
         // 2 basic pattern: decreasingTriangle and increasingTriangle. 2 main items of printing: whitespace or pattern (can be #, $, * )
         //increasingBottomLeftTrianglePatterns();
@@ -644,10 +742,17 @@ public class conditionalAndPatterns {
         //decreasingTopRightTrianglePatterns();
         //pyramidPatterns();
         //reversePyramidPatterns();
-        diamondPatterns();
+        //diamondPatterns();
 
+        //NUMBERS PATTERNS
+        // numbers patterns are consist of 2 parts: shape and numbers. Try to separate these 2 parts to reduce chances of error
+        //incrementSimilarRowsBottomLeftNumberPatterns();
+        //incrementDifferentRowsBottomLeftNumberPatterns();
+        //decrementSimilarRowsBottomLeftNumberPatterns();
+        //decrementDifferentRowsBottomLeftNumberPatterns();
+        //alternate number
 
-        //Numbers pattern
+        //BACK TO JAVA EXERCISES
     }
 
 }
