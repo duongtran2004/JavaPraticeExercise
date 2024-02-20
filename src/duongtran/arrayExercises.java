@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
 
-public class JavaArrayExercises {
+public class arrayExercises {
 public static void Ex1(){
     //Requirement: Ask user to input an array. Print sum of element, average of element, error handling to user (wrong input)
     //get user input

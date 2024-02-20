@@ -1,6 +1,6 @@
 package duongtran;
 
-public class JavaRecursiveExercise {
+public class recursiveExercise {
     public static int factorial(int n) { //pass int n to method parameter
         //Requirement: Factorial
         //base case to exit the loop, prevent stackoverflow

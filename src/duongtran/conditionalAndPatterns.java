@@ -158,7 +158,7 @@ public class conditionalAndPatterns {
         int year = scanner.nextInt();
         //convert number months to text month
         //initialize text months
-        String textMonth = "";
+        java.lang.String textMonth = "";
         switch (month) {
             case 1:
                 textMonth = "January";
