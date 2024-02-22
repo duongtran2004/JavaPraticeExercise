@@ -1,7 +1,7 @@
 package duongtran;
 
 import java.util.*;
-
+//remember to check the answers, they might have a better solution that you can learn from
 public class arrayExercises {
     //EX1: Sort numeric array and String array. Let user input 1D (1 dimensional array)
     // Later on you can learn to let user input 2D arrays
@@ -333,8 +333,13 @@ public class arrayExercises {
                 numericArray[i] = scanner.nextDouble(); //append each found Double into numericArray
             }
         }
-
         System.out.println("Your Input Numeric Array: " + Arrays.toString(numericArray));
+        //MAIN
+        //Step 1: Copy into another Array
+        //loop to compare value
+        //if the same value; => store index counter into a array called IndexNumbers
+        //loop through original array, remove all index counters => store in result array
+        //print the results
 
     }
 
