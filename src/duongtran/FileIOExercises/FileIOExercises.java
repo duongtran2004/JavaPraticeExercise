@@ -135,9 +135,6 @@ public class FileIOExercises {
     }
 
 
-    public static void readTextOfAllFilesUnderAFolder() {
-    }
-
     public static void deleteFile() {
         //store the address of the file that need to be delete in a File Object
         File fileNeedToBeDeleted = new File("C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\FileIOExercises\\sampleFolder\\fileNeedToBeDeleted2");
@@ -162,13 +159,48 @@ public class FileIOExercises {
     }
 
     public static void permissionCheck() {
+        //NOTE: 3 main types of Permissions in Java:
+        //canExecutable()
+        //canRead()
+        //canWrite()
+        //=> use file Class and file Object to use these methods for permission check
+        File checkingFile = new File("C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\FileIOExercises\\sampleFolder\\sampleText.txt");
+        if (checkingFile.canRead()) {
+            System.out.println("You can read this file");
+        } else {
+            System.out.println("You cannot read this file");
+        }
+        if (checkingFile.canWrite()) {
+            System.out.println("You can write this file");
+        } else {
+            System.out.println("You cannot write this file");
+        }
+        if (checkingFile.canExecute()) {
+            System.out.println("You can run this file");
+        } else {
+            System.out.println("You cannot run this file");
+        }
     }
 
     public static void listItemsNameAlphabeticallyAscending() {
+        //print all item name => store into array => sort array alphabetically ascending => loop through new array and print result
+        //create File object to store the address of the folder we want to read
+        File targetFile = new File("C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\FileIOExercises\\sampleFolder");
+        //create String array to store all file pathname.
+        String[] filesList;
+
+        //populate element into the array by pathname using fileObject.list()
+        filesList = targetFile.list();
+        //Display the result
+      Arrays.sort(filesList);
+        System.out.println("List of all items under this directory in the alphabetical order: ");
+        for (String pathname : filesList
+        ) {
+            System.out.println(pathname);
+
+        }
     }
 
-    public static void ArrangeItemByAscendingNames() {
-    }
 
     public static void getFileSize() throws IOException {
         File file = new File("C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\FileIOExercises\\sampleFolder\\multiLineFile");
@@ -317,7 +349,9 @@ public class FileIOExercises {
         //readTextAtLineN();
         //emptyTheFile();
         //deleteTextByLine();
-        copyToExistingFile();
+        //copyToExistingFile();
+        //permissionCheck();
+        listItemsNameAlphabeticallyAscending();
 
 
     }
