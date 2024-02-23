@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -192,7 +193,7 @@ public class FileIOExercises {
         //populate element into the array by pathname using fileObject.list()
         filesList = targetFile.list();
         //Display the result
-      Arrays.sort(filesList);
+        Arrays.sort(filesList);
         System.out.println("List of all items under this directory in the alphabetical order: ");
         for (String pathname : filesList
         ) {
@@ -263,46 +264,85 @@ public class FileIOExercises {
 
     }
 
-    public static void copyFileToAnotherLocation() {
+    public static void copySingleFileToAnotherLocation() throws IOException {
+        //Store address of original file and copied file
+        String originalFilePath = "C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\FileIOExercises\\sampleFolder\\fileThatNeedToBeCopied.txt";
+        String targetLocation = "C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\FileIOExercises\\sampleFolder\\copyFolder";
+//use File.copy (File Class)
+        //The Files.copy method takes Path objects as arguments, not String objects.
+        // You need to convert your file paths to Path objects using Paths.get.
+        //Use Path interface for Paths Class
+        Path originalPath = Paths.get(originalFilePath);
+        Path targetLocationPath = Paths.get(targetLocation);
+        // Get the filename from the original path
+        Path filename = originalPath.getFileName();
+
+        // Append the filename to the target location
+        targetLocationPath = targetLocationPath.resolve(filename);
+        // Use Files.copy with REPLACE_EXISTING option
+        Files.copy(originalPath, targetLocationPath, StandardCopyOption.REPLACE_EXISTING);
+        //=> require target location to be a file, not a directory (name the new file)
+
+
     }
 
+    public static void copyMultipleFilesToAnotherLocation() {
+
+    }
+
+
     public static void deleteTextByLine() throws IOException {
-        // => so simply store file content except the delete file => then empty the file => the write back the content
+        // => so simply store file content except the delete file => then empty the file => the write back the content (aka overwrite)
         //user input
         Scanner scanner = new Scanner(System.in);
         System.out.println("What line do you want to delete? ");
         int n = scanner.nextInt();
-        //Read First, Write Later. To prevent accidentially delete file content, open fileWriter in append mode (true)
-        //Create Reader Object to read the file up to line n
-        FileReader fileReader = new FileReader("C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\FileIOExercises\\sampleFolder\\multiLineFile");
+        //Store the file address into a File object
+        File file = new File("C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\FileIOExercises\\sampleFolder\\multiLineFile");
+        //Reader Objects 
+        FileReader fileReader = new FileReader(file);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
-        //create Writer objects
-        FileWriter fileWriter = new FileWriter("C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\FileIOExercises\\sampleFolder\\multiLineFile", true);
-        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-        //initialize lineCount variable
+        //initialize String value to store each line's content
+        String line;
+        //initialize arrayList to store lines
+        //Why use arrayList?
+        //Array: fixed size, but we dont know how many lines are there, so can't declare
+        //arrayList: flexible size
+        ArrayList<String> fileContent = new ArrayList<>();
+        //while loop for the entire file, if counter = n, continue (skip this time of loop)
+        //using while loop until readLine is null to read the whole file => append each line to arrayList
+        //initialize lineCount
         int lineCount = 0;
-        // Read lines until reaching the specified limit (n)
-        while (bufferedReader.readLine() != null) {
+        while ((line = bufferedReader.readLine()) != null) {
             lineCount++;
             if (lineCount == n) {
-                bufferedWriter.write("");
+                continue;
             }
+            fileContent.add(line);
+
         }
-//close everything after finished
-        bufferedReader.close();
+        //Writer Object to Overwrite item from the arrayList to the original file
+        FileWriter fileWriter = new FileWriter(file);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        for (String lineContent : fileContent
+        ) { bufferedWriter.write(lineContent);
+            bufferedWriter.newLine();
+        }
+        //ALWAYS REMEMBER TO CLOSE WRITER TO SAVE THE CHANGES !
         bufferedWriter.close();
 
     }
 
-    public static void deleteTextByLineAndRemoveWhiteSpace() {
 
-    }
 
     public static void deleteTextByContent() {
     }
 
     public static void changeFileName() {
+        File oldFile = new File("C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\FileIOExercises\\sampleFolder\\IWantANewName");
+        File newFile = new File("C:\\\\Users\\\\PC\\\\Desktop\\\\LearnJava\\\\src\\\\duongtran\\\\FileIOExercises\\\\sampleFolder\\\\YourNewNameHereSir");
+        oldFile.renameTo(newFile);
     }
 
     public static void replaceTextByLine() {
@@ -348,10 +388,14 @@ public class FileIOExercises {
         //getFileSize();
         //readTextAtLineN();
         //emptyTheFile();
-        //deleteTextByLine();
+
         //copyToExistingFile();
         //permissionCheck();
-        listItemsNameAlphabeticallyAscending();
+        //listItemsNameAlphabeticallyAscending();
+        //copySingleFileToAnotherLocation();
+        changeFileName();
+        //deleteTextByLine();
+        //deleteTextByLineAndRemoveWhiteSpace();=> not done yet
 
 
     }
