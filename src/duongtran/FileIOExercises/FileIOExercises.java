@@ -3,6 +3,10 @@ package duongtran.FileIOExercises;
 import java.awt.*;
 import java.io.*;
 import java.nio.channels.FileChannel;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -19,7 +23,7 @@ public class FileIOExercises {
             //create FileWriter object to store address of the file we need to modify. //store file address in String
 
             //create BufferedWriter object to store  FileWriter object
-            //create new fule
+
 
             BufferedWriter bufferedWriter = new BufferedWriter(
                     new FileWriter("C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\FileIOExercises\\sampleFolder\\emptyFile.txt", false));
@@ -83,6 +87,11 @@ public class FileIOExercises {
 
     public static void readNFirstLineOfFile() throws IOException {
 //same with readAllFile but at a for loop inside-most to stop at n
+        //Read the content of the original file line by line, excluding the line you want to clear.
+        //Create a temporary file and write the modified content to it.
+        //Empty the original file.
+        //Write the content from the temporary file back to the original file.
+        //Rename the temporary file to the original file.
         //user input
         Scanner scanner = new Scanner(System.in);
         System.out.println("How many lines you want to read? ");
@@ -206,10 +215,55 @@ public class FileIOExercises {
         bufferedWriter.close();
     }
 
-    public static void deleteTextByLine() {
+    public static void copyToExistingFile() throws IOException {
+        //Store address of original file and copied file
+        String originalFilePath = "C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\FileIOExercises\\sampleFolder\\fileThatNeedToBeCopied.txt";
+        String copiedFilePath = "C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\FileIOExercises\\sampleFolder\\copyFolder\\copiedFile";
+//use File.copy (File Class)
+        //The Files.copy method takes Path objects as arguments, not String objects.
+        // You need to convert your file paths to Path objects using Paths.get.
+        //Use Path interface for Paths Class
+        Path originalPath = Paths.get(originalFilePath);
+        Path copiedPath = Paths.get(copiedFilePath);
+        // Use Files.copy with REPLACE_EXISTING option
+        Files.copy(originalPath, copiedPath, StandardCopyOption.REPLACE_EXISTING);
+
+
+    }
+
+    public static void copyFileToAnotherLocation() {
+    }
+
+    public static void deleteTextByLine() throws IOException {
+        // => so simply store file content except the delete file => then empty the file => the write back the content
         //user input
-        S
+        Scanner scanner = new Scanner(System.in);
         System.out.println("What line do you want to delete? ");
+        int n = scanner.nextInt();
+        //Read First, Write Later. To prevent accidentially delete file content, open fileWriter in append mode (true)
+        //Create Reader Object to read the file up to line n
+        FileReader fileReader = new FileReader("C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\FileIOExercises\\sampleFolder\\multiLineFile");
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        //create Writer objects
+        FileWriter fileWriter = new FileWriter("C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\FileIOExercises\\sampleFolder\\multiLineFile", true);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+        //initialize lineCount variable
+        int lineCount = 0;
+        // Read lines until reaching the specified limit (n)
+        while (bufferedReader.readLine() != null) {
+            lineCount++;
+            if (lineCount == n) {
+                bufferedWriter.write("");
+            }
+        }
+//close everything after finished
+        bufferedReader.close();
+        bufferedWriter.close();
+
+    }
+
+    public static void deleteTextByLineAndRemoveWhiteSpace() {
 
     }
 
@@ -262,6 +316,8 @@ public class FileIOExercises {
         //getFileSize();
         //readTextAtLineN();
         //emptyTheFile();
+        //deleteTextByLine();
+        copyToExistingFile();
 
 
     }
