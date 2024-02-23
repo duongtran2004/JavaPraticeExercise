@@ -2,7 +2,10 @@ package duongtran.FileIOExercises;
 
 import java.awt.*;
 import java.io.*;
+import java.nio.channels.FileChannel;
+import java.util.Arrays;
 import java.util.Scanner;
+
 
 //Questions:
 //why we need Buffered Writer? Why FileWriter alone not enough ?
@@ -52,14 +55,14 @@ public class FileIOExercises {
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         //read content, remember to close buffer
         //initialize String value to store line
-        String line ;
+        String line;
         //using while loop until readLine is null to read the whole file
-        while ((line =bufferedReader.readLine()) != null){
+        while ((line = bufferedReader.readLine()) != null) {
             System.out.println(line);
 
         }
 
-       bufferedReader.close();
+        bufferedReader.close();
 //Read vs Read Line?
 //read(): This method reads a single character from the stream and returns it as an integer.
 // The integer represents the character read, or -1 if the end of the stream has been reached.
@@ -74,7 +77,7 @@ public class FileIOExercises {
         //create BufferReader object
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         //read content, remember to close buffer
-        System.out.println("The content of the file is: " +  bufferedReader.readLine());
+        System.out.println("The content of the file is: " + bufferedReader.readLine());
         bufferedReader.close();
     }
 
@@ -90,7 +93,7 @@ public class FileIOExercises {
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         //read content, remember to close buffer
         //initialize String value to store line
-        String line ;
+        String line;
         //initialize lineCount variable
         int lineCount = 0;
         // Read lines until reaching the specified limit (n)
@@ -103,9 +106,23 @@ public class FileIOExercises {
     }
 
 
-
     public static void printAllItemNamesUnderAFolder() {
-        //create File
+        //create File object to store the address of the folder we want to read
+        File targetFile = new File("C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\FileIOExercises\\sampleFolder");
+        //create String array to store all file pathname.
+        String[] filesList;
+
+        //populate element into the array by pathname using fileObject.list()
+        filesList = targetFile.list();
+        //Display the result
+        //Method 1: Display array format, all items on the same line
+        System.out.println(Arrays.toString(filesList));
+        //for each through pathname array to print the result, each line include 1 pathname
+        for (String pathname : filesList
+        ) {
+            System.out.println(pathname);
+
+        }
     }
 
 
@@ -113,10 +130,26 @@ public class FileIOExercises {
     }
 
     public static void deleteFile() {
+        //store the address of the file that need to be delete in a File Object
+        File fileNeedToBeDeleted = new File("C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\FileIOExercises\\sampleFolder\\fileNeedToBeDeleted2");
+        //delete the file and display result to user
+        if (fileNeedToBeDeleted.delete()) {
+            System.out.println(fileNeedToBeDeleted.getName() + " has been successfully deleted !");
+        } else {
+            System.out.println("Failed to delete, file not exist");
+        }
+
     }
 
 
     public static void checkIfFileOrFolderExist() {
+        //store the address of the file that need to be checked in a File Object
+        File file = new File("C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\FileIOExercises\\sampleFolder\\multiLineFile");
+        if (file.exists()) {
+            System.out.println("File exist !");
+        } else {
+            System.out.println("File does not exist !");
+        }
     }
 
     public static void permissionCheck() {
@@ -128,16 +161,56 @@ public class FileIOExercises {
     public static void ArrangeItemByAscendingNames() {
     }
 
-    public static void getFileSize() {
+    public static void getFileSize() throws IOException {
+        File file = new File("C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\FileIOExercises\\sampleFolder\\multiLineFile");
+        FileChannel fileChannel = FileChannel.open(file.toPath());
+        System.out.println("File size is: " + fileChannel.size() + " byte(s)");
+        // Close the file channel when done
+        fileChannel.close();
+
     }
 
-    public static void readTextByLine() {
+    public static void readTextAtLineN() throws IOException {
+        //same with readAllFile but at a for loop inside-most to stop at n
+        //user input
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("What line do you want to read ? ");
+        int n = scanner.nextInt();
+        //create FileReader object => make sure the file address is correct
+        FileReader fileReader = new FileReader("C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\FileIOExercises\\sampleFolder\\multiLineFile");
+        //create BufferReader object
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        //read content, remember to close buffer
+        //initialize String value to store line
+        String line;
+        //initialize lineCount variable
+        int lineCount = 0;
+        // Read lines until reaching the specified limit (n)
+        while ((line = bufferedReader.readLine()) != null) {
+            lineCount++;
+            if (lineCount == n) {
+                System.out.println("The content at line " + n + " is: " + line);
+            }
+        }
+
+
+        bufferedReader.close();
     }
 
-    public static void deleteAllTextOfFile() {
+    public static void emptyTheFile() throws IOException {
+        //=> overwrite content of the file "" (empty)
+
+        FileWriter fileWriter = new FileWriter("C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\FileIOExercises\\sampleFolder\\fileThatNeedToBeEmpty");
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        bufferedWriter.write("");
+        bufferedWriter.close();
     }
 
     public static void deleteTextByLine() {
+        //user input
+        S
+        System.out.println("What line do you want to delete? ");
+
     }
 
     public static void deleteTextByContent() {
@@ -182,7 +255,13 @@ public class FileIOExercises {
         //readAllFile();
         //writeToExistFile();
         //readFirstLineOfFile();
-        readNFirstLineOfFile();
+        //readNFirstLineOfFile();
+        //printAllItemNamesUnderAFolder();
+        //deleteFile();
+        //checkIfFileOrFolderExist();
+        //getFileSize();
+        //readTextAtLineN();
+        //emptyTheFile();
 
 
     }
