@@ -291,7 +291,7 @@ public class FileIOExercises {
     }
 
 
-    public static void deleteTextByLine() throws IOException {
+    public static void deleteTextByLineAll() throws IOException {
         // => so simply store file content except the delete file => then empty the file => the write back the content (aka overwrite)
         //user input
         Scanner scanner = new Scanner(System.in);
@@ -336,7 +336,7 @@ public class FileIOExercises {
     }
 
 
-    public static void deleteTextByContent() throws IOException {
+    public static void deleteTextByContentAll() throws IOException {
         // => so simply store file content except the delete file => then empty the file => the write back the content (aka overwrite)
         //user input
         Scanner scanner = new Scanner(System.in);
@@ -385,10 +385,10 @@ public class FileIOExercises {
             oldFile.renameTo(newFile);
         }
 
-        public static void replaceTextByLine() {
+        public static void replaceTextByLineAll() {
         }
 
-        public static void replaceTextByContentOnce() throws IOException {
+        public static void replaceTextByContentAll() throws IOException {
             // => so simply store file content except the delete file => then empty the file => the write back the content (aka overwrite)
             //user input
             Scanner scanner = new Scanner(System.in);
@@ -435,7 +435,7 @@ public class FileIOExercises {
             bufferedWriter.close();
         }
 
-        public static void replaceTextByContentAlL() {
+        public static void replaceTextByContentOnce() {
     }
 
     public static void moveFileIntoAnotherFolder() {
@@ -478,10 +478,10 @@ public class FileIOExercises {
         //listItemsNameAlphabeticallyAscending();
         //copySingleFileToAnotherLocation();
         //changeFileName();
-        //deleteTextByLine();
-        //deleteTextByContent();
-        //replaceTextByLine(); => not done yet
-        replaceTextByContentOnce();
+        //deleteTextByLineAll();
+        //deleteTextByContentAll();
+        //replaceTextByLineAll(); => not done yet
+        //replaceTextByContentOnce() => not done yet
         //replaceTextByContentAlL(); => not done yet
 
 
