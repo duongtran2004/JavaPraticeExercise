@@ -326,7 +326,8 @@ public class FileIOExercises {
         FileWriter fileWriter = new FileWriter(file);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         for (String lineContent : fileContent
-        ) { bufferedWriter.write(lineContent);
+        ) {
+            bufferedWriter.write(lineContent);
             bufferedWriter.newLine();
         }
         //ALWAYS REMEMBER TO CLOSE WRITER TO SAVE THE CHANGES !
@@ -335,23 +336,102 @@ public class FileIOExercises {
     }
 
 
+    public static void deleteTextByContent() throws IOException {
+        // => so simply store file content except the delete file => then empty the file => the write back the content (aka overwrite)
+        //user input
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("What text do you want to delete? ");
+        String deleteText = scanner.nextLine(); //use scanner .nextLine(), instead of .next(only read a word)
+        //Store the file address into a File object
+        File file = new File("C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\FileIOExercises\\sampleFolder\\multiLineFile");
+        //Reader Objects
+        FileReader fileReader = new FileReader(file);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-    public static void deleteTextByContent() {
+        //initialize String value to store each line's content
+        String line;
+        //initialize arrayList to store lines
+        //Why use arrayList?
+        //Array: fixed size, but we dont know how many lines are there, so can't declare
+        //arrayList: flexible size
+        ArrayList<String> fileContent = new ArrayList<>();
+        //while loop for the entire file, if counter = n, continue (skip this time of loop)
+        //using while loop until readLine is null to read the whole file => append each line to arrayList
+        //initialize lineCount
+
+        while ((line = bufferedReader.readLine()) != null) {
+
+            if (line.equals(deleteText)) { //.equals() to compare string. The "==" check for address / references quality, not value equality
+                continue;
+            }
+            fileContent.add(line);
+
+        }
+        //Writer Object to Overwrite item from the arrayList to the original file
+        FileWriter fileWriter = new FileWriter(file);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        for (String lineContent : fileContent
+        ) {
+            bufferedWriter.write(lineContent);
+            bufferedWriter.newLine();
+        }
+        //ALWAYS REMEMBER TO CLOSE WRITER TO SAVE THE CHANGES !
+        bufferedWriter.close();
     }
 
-    public static void changeFileName() {
-        File oldFile = new File("C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\FileIOExercises\\sampleFolder\\IWantANewName");
-        File newFile = new File("C:\\\\Users\\\\PC\\\\Desktop\\\\LearnJava\\\\src\\\\duongtran\\\\FileIOExercises\\\\sampleFolder\\\\YourNewNameHereSir");
-        oldFile.renameTo(newFile);
-    }
+        public static void changeFileName() {
+            File oldFile = new File("C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\FileIOExercises\\sampleFolder\\IWantANewName");
+            File newFile = new File("C:\\\\Users\\\\PC\\\\Desktop\\\\LearnJava\\\\src\\\\duongtran\\\\FileIOExercises\\\\sampleFolder\\\\YourNewNameHereSir");
+            oldFile.renameTo(newFile);
+        }
 
-    public static void replaceTextByLine() {
-    }
+        public static void replaceTextByLine() {
+        }
 
-    public static void replaceTextByContentOnce() {
-    }
+        public static void replaceTextByContentOnce() throws IOException {
+            // => so simply store file content except the delete file => then empty the file => the write back the content (aka overwrite)
+            //user input
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("What text do you want to delete? ");
+            String deleteText = scanner.nextLine(); //use scanner .nextLine(), instead of .next(only read a word)
+            //Store the file address into a File object
+            File file = new File("C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\FileIOExercises\\sampleFolder\\multiLineFile");
+            //Reader Objects
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-    public static void replaceTextByContentAlL() {
+            //initialize String value to store each line's content
+            String line;
+            //initialize arrayList to store lines
+            //Why use arrayList?
+            //Array: fixed size, but we dont know how many lines are there, so can't declare
+            //arrayList: flexible size
+            ArrayList<String> fileContent = new ArrayList<>();
+            //while loop for the entire file, if counter = n, continue (skip this time of loop)
+            //using while loop until readLine is null to read the whole file => append each line to arrayList
+            //initialize lineCount
+
+            while ((line = bufferedReader.readLine()) != null) {
+
+                if (line.equals(deleteText)) { //.equals() to compare string. The "==" check for address / references quality, not value equality
+                    continue;
+                }
+                fileContent.add(line);
+
+            }
+            //Writer Object to Overwrite item from the arrayList to the original file
+            FileWriter fileWriter = new FileWriter(file);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            for (String lineContent : fileContent
+            ) {
+                bufferedWriter.write(lineContent);
+                bufferedWriter.newLine();
+            }
+            //ALWAYS REMEMBER TO CLOSE WRITER TO SAVE THE CHANGES !
+            bufferedWriter.close();
+        }
+
+        public static void replaceTextByContentAlL() {
     }
 
     public static void moveFileIntoAnotherFolder() {
@@ -393,9 +473,9 @@ public class FileIOExercises {
         //permissionCheck();
         //listItemsNameAlphabeticallyAscending();
         //copySingleFileToAnotherLocation();
-        changeFileName();
+        //changeFileName();
         //deleteTextByLine();
-        //deleteTextByLineAndRemoveWhiteSpace();=> not done yet
+        deleteTextByContent();
 
 
     }
