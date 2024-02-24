@@ -394,6 +394,8 @@ public class FileIOExercises {
             Scanner scanner = new Scanner(System.in);
             System.out.println("What text do you want to delete? ");
             String deleteText = scanner.nextLine(); //use scanner .nextLine(), instead of .next(only read a word)
+            System.out.println("What is your replacement text ? ");
+            String newText = scanner.nextLine();
             //Store the file address into a File object
             File file = new File("C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\FileIOExercises\\sampleFolder\\multiLineFile");
             //Reader Objects
@@ -414,6 +416,8 @@ public class FileIOExercises {
             while ((line = bufferedReader.readLine()) != null) {
 
                 if (line.equals(deleteText)) { //.equals() to compare string. The "==" check for address / references quality, not value equality
+                    //append the newText to the arrayList
+                fileContent.add(newText);
                     continue;
                 }
                 fileContent.add(line);
@@ -475,7 +479,10 @@ public class FileIOExercises {
         //copySingleFileToAnotherLocation();
         //changeFileName();
         //deleteTextByLine();
-        deleteTextByContent();
+        //deleteTextByContent();
+        //replaceTextByLine(); => not done yet
+        replaceTextByContentOnce();
+        //replaceTextByContentAlL(); => not done yet
 
 
     }
