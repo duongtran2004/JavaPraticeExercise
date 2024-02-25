@@ -1,5 +1,9 @@
 package duongtran.ExceptionHandlingExercises;
 
+import java.io.*;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 public class ExceptionHandlingMain {
     //return error message to user
     //try-catch-throw-rethrow
@@ -32,15 +36,56 @@ public class ExceptionHandlingMain {
 //        }
     }
 
-    public static void main(String[] args) {
-try{
-    int result =      divideByZero(6, 0);
-    System.out.println("Result: " + result);
-}catch (DivideBy0Exception divideBy0Exception){
-    System.out.println("Error: " + divideBy0Exception.getMessage()); //getMessage() is inherit from the Throwable Class,
-    //now invoke the DivideBy0Exception constructor
+    public static void oddNumberFilter(int a) throws OddNumberException {
+        //handle the exception and return the message here, do not modify the main method
+        //check the exception condition first, ALWAYS
+        try {
+            if (a % 2 != 0) {
+                throw new OddNumberException("You cannot input an odd number !");
+            }
+            System.out.println("Input number " + a + " is even");
+        } catch (OddNumberException oddNumberException) {
+            System.out.println("Error: " + oddNumberException.getMessage());
+        }
+    }
 
-}
+    public static void readFile(String fileName) throws FileNotFoundException {
+//no need to create custom exception in this case, Java Library has already include it
+        File file = new File(fileName);
+        Scanner scanner = new Scanner(file);
 
+        // Read and process the contents of the file
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            System.out.println(line);
+        }
+
+        scanner.close();
+    }
+
+
+
+
+    public static void main(String[] args)  {
+//        //EX1:
+//        try {
+//            int result = divideByZero(6, 0);
+//            System.out.println("Result: " + result);
+//        } catch (DivideBy0Exception divideBy0Exception) {
+//            System.out.println("Error: " + divideBy0Exception.getMessage()); //getMessage() is inherit from the Throwable Class,
+//            //now invoke the DivideBy0Exception constructor
+//
+//        }
+
+//        //EX2
+//        oddNumberFilter(7);
+
+        //Ex3:
+        try {
+
+            readFile("hello pe");
+        } catch (FileNotFoundException fileNotFoundException) {
+            System.out.println("Error: " + fileNotFoundException.getMessage());
+        }
     }
 }
