@@ -110,6 +110,30 @@ public class ExceptionHandlingMain {
         bufferedReader.close();
     }
 
+    public static void duplicateNumberIsNotAllowed(int a, int b, int c) {
+
+        //exception condition: duplicate number
+        if (a == b || b == c || a == c) {
+            throw new DuplicateNumbersException("You cannot repeat your numbers !", new IllegalArgumentException());
+            // not so clean to user interface by returning error this way
+        } else {
+            System.out.println("Your input numbers are: " + a + "," + b + "," + c);
+        }
+
+
+    }
+
+    public static void stringMustContainVowels(String myString) throws NoVowelFoundException {
+        //make all String character lowercase
+        myString.toLowerCase();
+        //exception condition: 0 vowel found (vowels: A, E, I, O, U)
+        if (!myString.contains("a") && !myString.contains("e") && !myString.contains("i")  && !myString.contains("o") && !myString.contains("u")) {
+            throw new NoVowelFoundException("No vowels found in your string !");
+        } else {
+            System.out.println("Your string is valid.");
+        }
+    }
+
 
     public static void main(String[] args) throws IOException {
 //        //EX1:
@@ -145,11 +169,24 @@ public class ExceptionHandlingMain {
 //
 //    }
 
-        //Ex 5:
+        //Ex 5: Try catch block to resolve exception locally
+//        try {
+//            cannotReadEmptyFile("C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\ExceptionHandlingExercises\\emptyFile.txt");
+//        } catch (EmptyFileException emptyFileException) {
+//            System.out.println("Error: " + emptyFileException.getMessage());
+//        }
+
+//        //Ex6:
+//duplicateNumberIsNotAllowed(9,8,9);
+
+        //EX 7:
         try {
-            cannotReadEmptyFile("C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\ExceptionHandlingExercises\\emptyFile.txt");
-        } catch (EmptyFileException emptyFileException) {
-            System.out.println("Error: " + emptyFileException.getMessage());
+            stringMustContainVowels("pppp");
+
+        } catch (NoVowelFoundException noVowelFoundException) {
+            System.out.println("Error: " + noVowelFoundException.getMessage());
         }
+
+
     }
 }
