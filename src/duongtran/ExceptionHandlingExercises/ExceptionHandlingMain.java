@@ -63,10 +63,55 @@ public class ExceptionHandlingMain {
         scanner.close();
     }
 
+    public static void readFileFilterOutPositiveNumbers(String fileName) throws IOException {
+        //initialize file object to store file Name
+        //initialize reader object
+        File file = new File(fileName);
+        FileReader fileReader = new FileReader(fileName);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        //scanner object to scan through the file
+        Scanner scanner = new Scanner(file);
+        //read characters of file, call exception when read positive number (char from 1 to 9)
+
+        while (scanner.hasNextLine()) {
+            char c = (char) bufferedReader.read();
+            //exception condition
+            if (Character.isDigit(c) && c != '0') {
+                throw new PositiveNumbersException("Found positive numbers !");
+            }
+            System.out.println(c);
+        }
+        scanner.close();
+        bufferedReader.close();
 
 
+    }
 
-    public static void main(String[] args)  {
+    public static void cannotReadEmptyFile(String fileName) throws IOException {
+        //create FileReader object => make sure the file address is correct
+        FileReader fileReader = new FileReader(fileName);
+        //create BufferReader object
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        //read content, remember to close buffer
+        //initialize String value to store line
+        String line;
+        //initialize lineCount to check for empty file
+        int lineCount = 0;
+        //using while loop until readLine is null to read the whole file
+        while ((line = bufferedReader.readLine()) != null) {
+            System.out.println(line);
+            lineCount += 1;
+        }
+        //exception condition
+        if (lineCount == 0) {
+            throw new EmptyFileException("The file is empty !");
+        }
+
+        bufferedReader.close();
+    }
+
+
+    public static void main(String[] args) throws IOException {
 //        //EX1:
 //        try {
 //            int result = divideByZero(6, 0);
@@ -80,12 +125,31 @@ public class ExceptionHandlingMain {
 //        //EX2
 //        oddNumberFilter(7);
 
-        //Ex3:
-        try {
+//        //Ex3:
+//        try {
+//
+//            readFile("hello pe");
+//        } catch (FileNotFoundException fileNotFoundException) {
+//            System.out.println("Error: " + fileNotFoundException.getMessage());
+//        }
+//    }
 
-            readFile("hello pe");
-        } catch (FileNotFoundException fileNotFoundException) {
-            System.out.println("Error: " + fileNotFoundException.getMessage());
+//        //EX 4:
+//        //handle the exception locally inside the main method here, so no need to throw at the method signature
+//        try {
+//            readFileFilterOutPositiveNumbers("C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\ExceptionHandlingExercises\\SampleFile.txt");
+//
+//        } catch (PositiveNumbersException positiveNumbersException) {
+//            System.out.println("Error: " + positiveNumbersException.getMessage());
+//        }
+//
+//    }
+
+        //Ex 5:
+        try {
+            cannotReadEmptyFile("C:\\Users\\PC\\Desktop\\LearnJava\\src\\duongtran\\ExceptionHandlingExercises\\emptyFile.txt");
+        } catch (EmptyFileException emptyFileException) {
+            System.out.println("Error: " + emptyFileException.getMessage());
         }
     }
 }
