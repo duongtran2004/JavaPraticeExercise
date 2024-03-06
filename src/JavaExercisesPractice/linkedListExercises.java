@@ -251,6 +251,7 @@ public class linkedListExercises {
 
         //Ex 15: Swap 2 elements
         //swapElementLinkedList(colors);
+        ///
 
 //        //Ex 16: Shuffle the linkedList
 //        shuffleLinkedList(colors);
