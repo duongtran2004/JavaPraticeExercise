@@ -67,9 +67,43 @@ public class JavaHashSetExercise {
 
     }
 
-    public static void convertHashSetToTreeSet(HashSet hashSet) {
-        TreeSet<Integer> newTreeSet = hashSet.t
-        System.out.println("New Array is: " + newTreeSet);
+    public static <T> void convertHashSetToTreeSet(HashSet<T> hashSet) { //generic methods: works with different datatypes
+        //create new TreeSet object
+        TreeSet<T> newTreeSet = new TreeSet<>(hashSet);
+        System.out.println("New Tree Set is: " + newTreeSet);
+
+
+    }
+
+    public static void findNumberLessThanNHashSet(HashSet hashSet) {
+        //practice using Iterator
+        //generate Iterator object for the hashSet
+        Iterator<Integer> iterator = hashSet.iterator();
+
+        while (iterator.hasNext()) {
+            //create variable to store hashSet's element value
+            int element = iterator.next();
+            //condition check to print elements > 7
+            if (element > 7) {
+                System.out.println("The element " + element + " is greater than 7 !");
+            }
+        }
+
+    }
+
+    public static void compareTwoHashSet(HashSet hashSet1, HashSet hashSet2) {
+        //equals() method: compare object value
+        if (hashSet1.equals(hashSet2)) {
+            System.out.println("The 2 HashSets are the same !");
+        } else {
+            System.out.println("The 2 HashSets are difference !");
+        }
+    }
+    public static void compareTwoHashSetAndRetainSameElements(HashSet hashSet1, HashSet hashSet2) {
+      //using retainAll
+
+        hashSet1.retainAll(hashSet2);
+        System.out.println("Same elements: " + hashSet1);
 
 
     }
@@ -80,7 +114,7 @@ public class JavaHashSetExercise {
         //add elements into HashSet
         integerNumbers.add(7);
         integerNumbers.add(0);
-        integerNumbers.add(null);
+        //integerNumbers.add(null);
         integerNumbers.add(1);
         integerNumbers.add(0); //this won't work as HashSet does not allow duplication
         integerNumbers.add(8);
@@ -94,8 +128,24 @@ public class JavaHashSetExercise {
         //countHashSetElements(integerNumbers);
         //checkForEmptyHashSet(integerNumbers);
         //cloneHashSet(integerNumbers);
-        convertHashSetToArray(integerNumbers);
+        //convertHashSetToArray(integerNumbers);
+        //convertHashSetToTreeSet(integerNumbers);
+        //TreeSet does not allow Null element
+        //findNumberLessThanNHashSet(integerNumbers);
 
+        //create new HashSet for comparison
+        HashSet<Integer> integerNumbers2 = new HashSet<Integer>(10);
+        //add elements into HashSet
+        integerNumbers2.add(7);
+        integerNumbers2.add(0);
+        //integerNumbers.add(null);
+        integerNumbers2.add(1);
+        integerNumbers2.add(0); //this won't work as HashSet does not allow duplication
+        //integerNumbers2.add(8);
+
+        //method call
+        //compareTwoHashSet(integerNumbers, integerNumbers2);
+        compareTwoHashSetAndRetainSameElements(integerNumbers2, integerNumbers);
 
     }
 }
