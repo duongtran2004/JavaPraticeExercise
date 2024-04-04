@@ -1,0 +1,7 @@
+ID    | Name                | Salary
+--------------------------------------
+1001  | John Doe            | 50000.0
+1002  | Jane Smith          | 60000.0
+1003  | Michael Johnson     | 55000.0
+1004  | Emily Davis         | 62000.0
+1005  | David Wilson        | 58000.0
