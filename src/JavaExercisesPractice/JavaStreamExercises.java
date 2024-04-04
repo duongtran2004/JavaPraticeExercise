@@ -1,6 +1,7 @@
 package JavaExercisesPractice;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.OptionalDouble;
 import java.util.stream.Collectors;
@@ -48,9 +49,21 @@ public class JavaStreamExercises {
         System.out.println("Lowercase list of String" + lowerCaseListOfString);
     }
 
+    public static void removeDuplicateElements(){
+        //original list of elements
+        List<String> originalList = Arrays.asList("Duong", "Hung", "Dung", "Duong");
+        List<String> newList = originalList.stream()
+                .distinct()
+                .collect(Collectors.toList());
+        //display the result
+        System.out.println("Original List: " + originalList);
+        System.out.println("Modified List: " + newList);
+    }
+
     public static void main(String[] args) {
         //calculateAverage();
-        upCaseAndDownCase();
+        //upCaseAndDownCase();
+        removeDuplicateElements();
 
     }
 }
